@@ -2,6 +2,7 @@
   "name": "东马沙砂",
   "short_name": "东马沙砂天气",
   "description": "Sabah & Sarawak 东马沙砂 — farm weather forecast / 个人化农友天气预报",
+  "id": "/weathernextforsabahsarawak/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
