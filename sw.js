@@ -15,9 +15,45 @@
 // wnext-ag-v41-weathernextforsabahsarawak, name 东马沙砂, 4 seed farms
 // (c_ss- IDs preserved: 2 Sarawak lowland + Keningau ~550m + Kionsom ~200m),
 // seed version ss-arch1. bump CACHE_VERSION on each release
+// ------------------------------------------------------------
+// BROADCAST CLARITY PORT (from Raub v1.3.0–v1.3.14, applied 2026-06-05):
+// the WhatsApp broadcast text builder (buildBroadcastText) was replaced wholesale
+// with the refined Raub version. Sabah & Sarawak identity is UNCHANGED —
+// weathernextforsabahsarawak namespace, appId wnext-ag-v41-weathernextforsabahsarawak,
+// name 东马沙砂, 4 seed farms (c_ss- IDs: 2 Sarawak lowland + Keningau ~550m +
+// Kionsom ~200m), seed version ss-arch1, the East-Malaysia ELEVATION-AWARE AI
+// prompt (isHighland = elev>=900m switches cool-highland vs hot-lowland framing),
+// and the build's GPS sort are all preserved exactly. Only the broadcast text
+// logic was swapped (function body verified against the pre-fix baseline, zero
+// build-specific drift; elevation logic lives in the prompt/computeFog, outside
+// the function). Fixes carried over:
+//   • Fog tag gated to the broadcast window (no warning about an already-past dawn)
+//   • Fog rendered in the location's language + Malay, never the greeting choice
+//   • Fog tag placed BEFORE the afternoon storm clause (dawn→afternoon order)
+//   • Favourites day-1 capped at 23:00 (no double-listing tomorrow's small hours)
+//   • Afternoon midnight-crossover note ("12am 之后为明天预报")
+//   • 🌫️ and 🕛 emoji removed (blank-box on older device OSes); 📍 kept
+//   • Single-language Malay hourly labels now render in Malay
+//   • Thin-rain reconciliation ("可能有丝丝细雨 / Possible drizzle / Mungkin hujan
+//     merintik-rintik") instead of a contradictory "no rain"
+//   • Confidence marker states WHAT models agree on ("模型一致：很可能有雨 / 大致无雨")
+//   • Contradiction sweep: past-storm suppression, probability floored to the
+//     measurable-hour signal, trace tag suppressed when a real rain hour exists
+// ------------------------------------------------------------
+// HOME-SCREEN COLUMN FIX (UI, applied 2026-06-05): this build's seed farms are
+// ALL East-Malaysia, so the dual-column home screen (西马 West | 东马 East) left
+// an empty West column at half/full width while the East column was clipped at
+// half-width — the elevation reading on each East card was cut off. The render
+// logic only had a no-EAST-farms case (hide East, West full-width, for Cameron /
+// West-only builds); it had no mirror case. Added the symmetric no-WEST-farms
+// branch: hide the West column and let East take the FULL frame width (and its
+// 东马 header is hidden in that single-column mode). The static initial markup
+// now also defaults to East-full-width so there's no empty-West flash on load.
+// The split is restored automatically if a West-Malaysia farm is ever added.
+// bump CACHE_VERSION on each release
 // ============================================================
 
-const CACHE_VERSION = 'wnext-weathernextforsabahsarawak-202606041218';
+const CACHE_VERSION = 'wnext-weathernextforsabahsarawak-202606060215';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const WEATHER_CACHE = `${CACHE_VERSION}-weather`;
