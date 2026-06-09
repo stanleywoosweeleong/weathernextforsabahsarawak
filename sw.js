@@ -61,7 +61,7 @@
 // / Dense fog in the morning / Kabus tebal waktu pagi). East-Malaysia
 // elevation-aware AI prompt (isHighland=elev>=900m) + home-column fix unchanged.
 
-const CACHE_VERSION = 'wnext-weathernextforsabahsarawak-202606082200';
+const CACHE_VERSION = 'wnext-weathernextforsabahsarawak-202606091340';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const WEATHER_CACHE = `${CACHE_VERSION}-weather`;
